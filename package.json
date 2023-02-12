@@ -1,0 +1,28 @@
+{
+  "name": "dial-gauge",
+  "version": "0.1.0",
+  "description": "Dial Gauge is a web component that provides a fully customizable dial gauge for numeric display. It utilizes SVG and is written in pure Javascript with no dependencies.",
+  "type": "module",
+  "main": "dial-gauge.js",
+  "module": "dial-gauge.js",
+  "files": [],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smontanus/dial-gauge.git"
+  },
+  "keywords": [
+    "web",
+    "component",
+    "custom",
+    "element",
+    "dial",
+    "gauge"
+  ],
+  "author": "Stephen Montanus steve@stevemontanus.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smontanus/dial-gauge/issues"
+  },
+  "homepage": "https://github.com/smontanus/dial-gauge#readme"
+}
