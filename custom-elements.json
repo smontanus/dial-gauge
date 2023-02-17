@@ -4,11 +4,11 @@
     "modules": [
       {
         "kind": "javascript-module",
-        "path": "src/my-element.js",
+        "path": "dial-gauge.js",
         "declarations": [
           {
             "kind": "class",
-            "description": "",
+            "description": "Creates a new DialGauge custom HTML element. Utilized in HTML as the\n<dial-gauge> tag.",
             "name": "DialGauge",
             "members": [
               {
@@ -234,6 +234,7 @@
             "superclass": {
               "name": "HTMLElement"
             },
+            "tagName": "dial-gauge",
             "customElement": true
           }
         ],
@@ -243,15 +244,15 @@
             "name": "DialGauge",
             "declaration": {
               "name": "DialGauge",
-              "module": "src/my-element.js"
+              "module": "dial-gauge.js"
             }
           },
           {
             "kind": "custom-element-definition",
-            "name": "my-element",
+            "name": "dial-gauge",
             "declaration": {
-              "name": "MyElement",
-              "module": "src/my-element.js"
+              "name": "DialGauge",
+              "module": "dial-gauge.js"
             }
           }
         ]

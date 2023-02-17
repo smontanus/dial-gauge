@@ -1,6 +1,6 @@
 {
   "name": "dial-gauge",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Dial Gauge is a web component that provides a customizable dial gauge for numeric display.",
   "type": "module",
   "main": "dial-gauge.js",
