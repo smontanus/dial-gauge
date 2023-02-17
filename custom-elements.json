@@ -1,0 +1,260 @@
+{
+    "schemaVersion": "1.0.0",
+    "readme": "",
+    "modules": [
+      {
+        "kind": "javascript-module",
+        "path": "src/my-element.js",
+        "declarations": [
+          {
+            "kind": "class",
+            "description": "",
+            "name": "DialGauge",
+            "members": [
+              {
+                "kind": "field",
+                "name": "value",
+                "return": {
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                "parameters": [
+                  {
+                    "description": "The new value of the element.",
+                    "name": "newValue",
+                    "type": {
+                      "text": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "field",
+                "name": "mainTitle",
+                "return": {
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                "parameters": [
+                  {
+                    "description": "The new title of the element.",
+                    "name": "newValue",
+                    "type": {
+                      "text": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "field",
+                "name": "subTitle",
+                "return": {
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                "parameters": [
+                  {
+                    "description": "The new subtitle of the element.",
+                    "name": "newValue",
+                    "type": {
+                      "text": "string"
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "field",
+                "name": "scaleStart",
+                "return": {
+                  "type": {
+                    "text": "float"
+                  }
+                },
+                "parameters": [
+                  {
+                    "description": "The new starting scale value.",
+                    "name": "newValue",
+                    "type": {
+                      "text": "float"
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "field",
+                "name": "scaleEnd",
+                "return": {
+                  "type": {
+                    "text": "float"
+                  }
+                },
+                "parameters": [
+                  {
+                    "description": "The new ending scale value.",
+                    "name": "newValue",
+                    "type": {
+                      "text": "float"
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "method",
+                "name": "centerSVG",
+                "return": {
+                  "type": {
+                    "text": "Object"
+                  }
+                }
+              },
+              {
+                "kind": "method",
+                "name": "scaleDegrees",
+                "parameters": [
+                  {
+                    "name": "userValue",
+                    "description": "The user numeric value.",
+                    "type": {
+                      "text": "float"
+                    }
+                  }
+                ],
+                "return": {
+                  "type": {
+                    "text": "float"
+                  }
+                }
+              },
+              {
+                "kind": "method",
+                "name": "polarToCartesian",
+                "parameters": [
+                  {
+                    "name": "centerX",
+                    "description": "Arc center x coordinate.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  },
+                  {
+                    "name": "centerY",
+                    "description": "Arc center y coordinate.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  },
+                  {
+                    "name": "radius",
+                    "description": "Radius of the arc.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  },
+                  {
+                    "name": "angleInDegrees",
+                    "description": "Arc angle in degrees.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  }
+                ],
+                "return": {
+                  "type": {
+                    "text": "Object"
+                  }
+                }
+              },
+              {
+                "kind": "method",
+                "name": "describeArc",
+                "parameters": [
+                  {
+                    "name": "x",
+                    "description": "Arc center x coordinate.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  },
+                  {
+                    "name": "y",
+                    "description": "Arc center y coordinate.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  },
+                  {
+                    "name": "radius",
+                    "description": "Radius of the arc.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  },
+                  {
+                    "name": "startAngle",
+                    "description": "Arc start angle in degrees.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  },
+                  {
+                    "name": "endAngle",
+                    "description": "Arc end angle in degrees.",
+                    "type": {
+                      "text": "integer"
+                    }
+                  }
+                ],
+                "return": {
+                  "type": {
+                    "text": "Object"
+                  }
+                }
+              }
+            ],
+            "attributes": [
+              {
+                "name": "value"
+              },
+              {
+                "name": "main-title"
+              },
+              {
+                "name": "sub-title"
+              },
+              {
+                "name": "scale-start"
+              },
+              {
+                "name": "scale-end"
+              }
+            ],
+            "superclass": {
+              "name": "HTMLElement"
+            },
+            "customElement": true
+          }
+        ],
+        "exports": [
+          {
+            "kind": "js",
+            "name": "DialGauge",
+            "declaration": {
+              "name": "DialGauge",
+              "module": "src/my-element.js"
+            }
+          },
+          {
+            "kind": "custom-element-definition",
+            "name": "my-element",
+            "declaration": {
+              "name": "MyElement",
+              "module": "src/my-element.js"
+            }
+          }
+        ]
+      }
+    ]
+}
