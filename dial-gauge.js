@@ -3,7 +3,7 @@
  * @fileOverview Dial Gauge is a web component that provides a
  * customizable dial gauge for numeric display. It utilizes SVG
  * and is written in pure Javascript with no dependencies.
- * @version 0.1.1
+ * @version 0.1.2
  * @author Stephen Montanus <steve@stevemontanus.com>
  * @copyright ©2023 Stephen Montanus Software Engineering.
  * @license MIT
@@ -297,25 +297,32 @@ export class DialGauge extends HTMLElement {
     attributeChangedCallback(attrName, oldVal, newVal) {
         switch (attrName) {
         case 'value':
-            if (newVal !== oldVal && newVal !== null) {
-                // Value is set, display the arc and numeric.
-                this.shadowRoot.querySelector('#gauge-arc').style.display = 'initial';
-                this.shadowRoot.querySelector('#gauge-numeric').style.display = 'initial';
-                // Get the center of component.
-                const center = this.centerSVG();
-                // Calculate the arc radius based on component width.
-                const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
-                    .clientWidth * .30;
-                // Scale new user value to degree.
-                const scaledValue = this.scaleDegrees(newVal);
-                // Update the arc display.
-                this.shadowRoot.querySelector('#gauge-arc')
-                    .setAttribute(
-                        'd',
-                        this.describeArc(center.x, center.y, arcRadius, 0, scaledValue),
-                    );
-                // Update the numeric display.
-                this.shadowRoot.querySelector('#gauge-numeric').textContent = newVal;
+            if (newVal !== null) {
+                // Check if value is within scale limits
+                if (newVal >= parseFloat(this.scaleStart) &&
+                    newVal <= parseFloat(this.scaleEnd)) { // Within scale limits.
+                    // Value is set, display the arc and numeric.
+                    this.shadowRoot.querySelector('#gauge-arc').style.display = 'initial';
+                    this.shadowRoot.querySelector('#gauge-numeric').style.display = 'initial';
+                    // Get the center of component.
+                    const center = this.centerSVG();
+                    // Calculate the arc radius based on component width.
+                    const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
+                        .clientWidth * .30;
+                    // Scale new user value to degree.
+                    const scaledValue = this.scaleDegrees(newVal);
+                    // Update the arc display.
+                    this.shadowRoot.querySelector('#gauge-arc')
+                        .setAttribute(
+                            'd',
+                            this.describeArc(center.x, center.y, arcRadius, 0, scaledValue),
+                        );
+                    // Update the numeric display.
+                    this.shadowRoot.querySelector('#gauge-numeric').textContent = newVal;
+                } else { // Outside scale limits.
+                    this.shadowRoot.querySelector('#gauge-arc').style.display = 'none';
+                    this.shadowRoot.querySelector('#gauge-numeric').textContent = 'OL';
+                }
             } else {
                 // Value is not set, hide the arc and numeric.
                 this.shadowRoot.querySelector('#gauge-arc').style.display = 'none';
