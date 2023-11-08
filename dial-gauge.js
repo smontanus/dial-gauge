@@ -74,8 +74,7 @@ template.innerHTML = `
 `;
 
 /**
- * Creates a new DialGauge custom HTML element. Utilized in HTML as the
- * <dial-gauge> tag.
+ * Creates a new DialGauge custom HTML element. Utilized in HTML as the <dial-gauge> tag.
  * @name DialGauge
  * @class
  * @extends HTMLElement
@@ -92,6 +91,7 @@ export class DialGauge extends HTMLElement {
             'sub-title',
             'scale-start',
             'scale-end',
+            'scale-offset',
         ];
     }
 
@@ -160,7 +160,6 @@ export class DialGauge extends HTMLElement {
     get scaleStart() {
         return this.getAttribute('scale-start');
     }
-
     /**
      * @description Set the DialGauge element user scale starting value.
      * @param {float} newValue The new starting scale value.
@@ -186,6 +185,22 @@ export class DialGauge extends HTMLElement {
     }
 
     /**
+     * @description Get the DialGauge user bottom offset angle.
+     * @return {float} The bottom offset angle.
+     */
+    get scaleOffset() {
+        return this.getAttribute('scale-offset');
+    }
+
+    /**
+     * @description Set the DialGauge user bottom offset angle.
+     * @param {float} newValue The new bottom offset angle.
+     */
+    set scaleOffset(newValue) {
+        this.setAttribute('scale-offset', newValue);
+    }
+
+    /**
      * @name centerSVG
      * @description Calculate the center of the SVG container.
      * @return {Object}
@@ -207,7 +222,7 @@ export class DialGauge extends HTMLElement {
     scaleDegrees(userValue) {
         const start = this.scaleStart;
         const end = this.scaleEnd;
-        return ((userValue - start) / (end - start)) * 360;
+        return ((userValue - start) / (end - start)) * (360 - 2 * this.scaleOffset);
     }
 
     /**
@@ -220,7 +235,7 @@ export class DialGauge extends HTMLElement {
      * @return {Object}
      */
     polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-        const angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+        const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
         return {
             x: centerX + (radius * Math.cos(angleInRadians)),
             y: centerY + (radius * Math.sin(angleInRadians)),
@@ -238,7 +253,7 @@ export class DialGauge extends HTMLElement {
      * @return {Object}
      */
     describeArc(x, y, radius, startAngle, endAngle) {
-        endAngle = endAngle >= 360 ? 359.99 : endAngle;
+        endAngle = endAngle >= 180 ? 179.99 : endAngle;
         const start = this.polarToCartesian(x, y, radius, endAngle);
         const end = this.polarToCartesian(x, y, radius, startAngle);
         const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
@@ -282,7 +297,13 @@ export class DialGauge extends HTMLElement {
         this.shadowRoot.querySelector('#gauge-background-arc')
             .setAttribute(
                 'd',
-                this.describeArc(center.x, center.y, arcRadius, 0, 360),
+                this.describeArc(
+                    center.x,
+                    center.y,
+                    arcRadius,
+                    this.scaleOffset - 180,
+                    180 - this.scaleOffset,
+                ),
             );
     }
 
@@ -315,7 +336,13 @@ export class DialGauge extends HTMLElement {
                     this.shadowRoot.querySelector('#gauge-arc')
                         .setAttribute(
                             'd',
-                            this.describeArc(center.x, center.y, arcRadius, 0, scaledValue),
+                            this.describeArc(
+                                center.x,
+                                center.y,
+                                arcRadius,
+                                this.scaleOffset - 180,
+                                scaledValue - (180 - this.scaleOffset),
+                            ),
                         );
                     // Update the numeric display.
                     this.shadowRoot.querySelector('#gauge-numeric').textContent = newVal;
@@ -337,43 +364,60 @@ export class DialGauge extends HTMLElement {
             break;
         case 'sub-title':
             if (newVal !== oldVal) {
-                // Update element subtitle subtitle.
+                // Update element subtitle attribute.
                 this.shadowRoot.querySelector('#gauge-subtitle').textContent = newVal;
             }
             break;
         case 'scale-start':
             if (newVal !== oldVal) {
+                // TODO: check for out of limits.
                 // Get the center of component.
                 const center = this.centerSVG();
                 // Calculate the arc radius based on component width.
                 const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
                     .clientWidth * .30;
                 // Scale new user value to degree.
-                const scaledValue = this.scaleDegrees(newVal);
+                const scaledValue = this.scaleDegrees(this.value);
                 // Update the arc display.
                 this.shadowRoot.querySelector('#gauge-arc')
                     .setAttribute(
                         'd',
-                        this.describeArc(center.x, center.y, arcRadius, 0, scaledValue),
+                        this.describeArc(
+                            center.x,
+                            center.y,
+                            arcRadius,
+                            this.scaleOffset - 180,
+                            scaledValue - (180 - this.scaleOffset),
+                        ),
                     );
             }
             break;
         case 'scale-end':
             if (newVal !== oldVal) {
+                // TODO: check for out of limits.
                 // Get the center of component.
                 const center = this.centerSVG();
                 // Calculate the arc radius based on component width.
                 const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
                     .clientWidth * .30;
                 // Scale new user value to degree.
-                const scaledValue = this.scaleDegrees(newVal);
+                const scaledValue = this.scaleDegrees(this.value);
                 // Update the arc display.
                 this.shadowRoot.querySelector('#gauge-arc')
                     .setAttribute(
                         'd',
-                        this.describeArc(center.x, center.y, arcRadius, 0, scaledValue),
+                        this.describeArc(
+                            center.x,
+                            center.y,
+                            arcRadius,
+                            this.scaleOffset - 180,
+                            scaledValue - (180 - this.scaleOffset),
+                        ),
                     );
             }
+            break;
+        case 'scale-offset':
+            // TODO:
             break;
         }
     }
