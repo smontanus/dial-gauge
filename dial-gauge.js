@@ -369,51 +369,69 @@ export class DialGauge extends HTMLElement {
             }
             break;
         case 'scale-start':
-            if (newVal !== oldVal) {
-                // TODO: check for out of limits.
-                // Get the center of component.
-                const center = this.centerSVG();
-                // Calculate the arc radius based on component width.
-                const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
-                    .clientWidth * .30;
-                // Scale new user value to degree.
-                const scaledValue = this.scaleDegrees(this.value);
-                // Update the arc display.
-                this.shadowRoot.querySelector('#gauge-arc')
-                    .setAttribute(
-                        'd',
-                        this.describeArc(
-                            center.x,
-                            center.y,
-                            arcRadius,
-                            this.scaleOffset - 180,
-                            scaledValue - (180 - this.scaleOffset),
-                        ),
-                    );
+            if (newVal !== null && newVal !== oldVal) {
+                // Check for scale start out of range.
+                if (this.value !== null &&
+                    newVal <= parseFloat(this.value)) { // Scale start is in range.
+                    // Get the center of component.
+                    const center = this.centerSVG();
+                    // Calculate the arc radius based on component width.
+                    const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
+                        .clientWidth * .30;
+                    // Scale the user value to degree.
+                    const scaledValue = this.scaleDegrees(this.value);
+                    // Re-initialize the arc and numeric displays.
+                    this.shadowRoot.querySelector('#gauge-arc').style.display = 'initial';
+                    this.shadowRoot.querySelector('#gauge-numeric').textContent = this.value;
+                    // Update the arc display.
+                    this.shadowRoot.querySelector('#gauge-arc')
+                        .setAttribute(
+                            'd',
+                            this.describeArc(
+                                center.x,
+                                center.y,
+                                arcRadius,
+                                this.scaleOffset - 180,
+                                scaledValue - (180 - this.scaleOffset),
+                            ),
+                        );
+                } else { // Scale start is out of range.
+                    this.shadowRoot.querySelector('#gauge-arc').style.display = 'none';
+                    this.shadowRoot.querySelector('#gauge-numeric').textContent = 'OL';
+                }
             }
             break;
         case 'scale-end':
-            if (newVal !== oldVal) {
-                // TODO: check for out of limits.
-                // Get the center of component.
-                const center = this.centerSVG();
-                // Calculate the arc radius based on component width.
-                const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
-                    .clientWidth * .30;
-                // Scale new user value to degree.
-                const scaledValue = this.scaleDegrees(this.value);
-                // Update the arc display.
-                this.shadowRoot.querySelector('#gauge-arc')
-                    .setAttribute(
-                        'd',
-                        this.describeArc(
-                            center.x,
-                            center.y,
-                            arcRadius,
-                            this.scaleOffset - 180,
-                            scaledValue - (180 - this.scaleOffset),
-                        ),
-                    );
+            if (newVal !== null && newVal !== oldVal) {
+                // Check for scale end out of range.
+                if (this.value !== null &&
+                    newVal >= parseFloat(this.value)) { // Scale end is in range.
+                    // Get the center of component.
+                    const center = this.centerSVG();
+                    // Calculate the arc radius based on component width.
+                    const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
+                        .clientWidth * .30;
+                    // Scale the user value to degree.
+                    const scaledValue = this.scaleDegrees(this.value);
+                    // Re-initialize the arc and numeric displays.
+                    this.shadowRoot.querySelector('#gauge-arc').style.display = 'initial';
+                    this.shadowRoot.querySelector('#gauge-numeric').textContent = this.value;
+                    // Update the arc display.
+                    this.shadowRoot.querySelector('#gauge-arc')
+                        .setAttribute(
+                            'd',
+                            this.describeArc(
+                                center.x,
+                                center.y,
+                                arcRadius,
+                                this.scaleOffset - 180,
+                                scaledValue - (180 - this.scaleOffset),
+                            ),
+                        );
+                } else { // Scale end is out of range.
+                    this.shadowRoot.querySelector('#gauge-arc').style.display = 'none';
+                    this.shadowRoot.querySelector('#gauge-numeric').textContent = 'OL';
+                }
             }
             break;
         case 'scale-offset':
