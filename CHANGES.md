@@ -4,6 +4,7 @@ Dial Gauge Changelog
 - Added scale offset attribute.
 - Fixed value out of scale limit when scale changed.
 
+
 #### Version 0.1.2 (2023-03-04)
 
 - Fixed bug where repeating values were not displayed.
