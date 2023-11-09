@@ -435,7 +435,41 @@ export class DialGauge extends HTMLElement {
             }
             break;
         case 'scale-offset':
-            // TODO:
+            if (newVal !== null && newVal !== oldVal) {
+                // Check for offset greater than 180 degrees.
+                this.scaleOffset = this.scaleOffset > 180 ? 180 : this.scaleOffset;
+                // Get the center of component.
+                const center = this.centerSVG();
+                // Calculate the arc radius based on component width.
+                const arcRadius = this.shadowRoot.querySelector('.dial-gauge')
+                    .clientWidth * .30;
+                // Scale the user value to degree.
+                const scaledValue = this.scaleDegrees(this.value);
+                // Update the background arc.
+                this.shadowRoot.querySelector('#gauge-background-arc')
+                    .setAttribute(
+                        'd',
+                        this.describeArc(
+                            center.x,
+                            center.y,
+                            arcRadius,
+                            this.scaleOffset - 180,
+                            180 - this.scaleOffset,
+                        ),
+                    );
+                // Update the arc display.
+                this.shadowRoot.querySelector('#gauge-arc')
+                    .setAttribute(
+                        'd',
+                        this.describeArc(
+                            center.x,
+                            center.y,
+                            arcRadius,
+                            this.scaleOffset - 180,
+                            scaledValue - (180 - this.scaleOffset),
+                        ),
+                    );
+            }
             break;
         }
     }
