@@ -1,5 +1,9 @@
 Dial Gauge Changelog
 --------------
+#### Version 0.1.3 (2023-11-08)
+- Added scale offset attribute.
+- Fixed value out of scale limit when scale changed.
+
 #### Version 0.1.2 (2023-03-04)
 
 - Fixed bug where repeating values were not displayed.

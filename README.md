@@ -1,7 +1,7 @@
 ## Dial Gauge Web Component
 [![Published on npm](https://img.shields.io/badge/npm-published-blue)](https://www.npmjs.com/package/dial-gauge)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/dial-gauge)
-[![Version](https://img.shields.io/badge/version-0.1.2-brightgreen)](https://github.com/smontanus/dial-gauge)
+[![Version](https://img.shields.io/badge/version-0.1.3-brightgreen)](https://github.com/smontanus/dial-gauge)
 
 Dial Gauge is a web component that provides a customizable dial gauge for numeric display. It is suitable for progress indication as well as graphical display of real time numeric data. It utilizes SVG and is written in pure Javascript with no dependencies.
 
@@ -20,11 +20,12 @@ The Dial Gauge component utilizes the custom element tag `<dial-gauge>`. The cus
 * scale-end - The custom element scale ending value.
 * main-title - The custom element main title, displayed at the top of the component.
 * sub-title - The custom element subtitle, displayed at the bottom of the component.
+* scale-offset - The custom element bottom offset, an angle applied to adjust the beginning and end of the scale.
 
 The component will automatically update when attributes are set dynamically and displays a numeric representation of the data, as well as the graphical dial. Values that are outside the scale range will display OL for outside limits. The component 'sub-title' attribute is suitable for displaying the units of the data.
 
 ```html
-<dial-gauge main-title="Main" sub-title="Sub" scale-start="0" scale-end="100">
+<dial-gauge main-title="Main" sub-title="Sub" scale-start="0" scale-end="100" scale-offset="30" value="50">
 </dial-gauge>
 ```
 
