@@ -12,7 +12,52 @@
 /** @constant {Object} */
 const template = document.createElement('template');
 template.innerHTML = `
-<style>
+<div class="dial-gauge">
+    <svg width="100%" height="100%">
+        <text id="gauge-title" x="50%" y="11%"></text>
+        <path id="gauge-background-arc" fill="none" />
+        <path id="gauge-arc" fill="none" />
+        <text id="gauge-numeric" x="50%" y="50%">0.0</text>
+        <text id="gauge-subtitle" x="50%" y="96%"></text>
+    </svg>
+</div>
+`;
+
+const styleSheet = CSSStyleSheet();
+styleSheet.replaceSync(`
+    :host {
+        /* Element */
+        --dg-background-color: #ffffff;
+        --dg-border: 1px solid #000000;
+        --dg-border-radius: 5px;
+        --dg-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.35);
+        --dg-display: inline-block;
+        --dg-height: 200px;
+        --dg-margin: 0;
+        --dg-width: 200px;
+        --dg-z-index: 0;
+    
+        /* Title */
+        --dg-title-color: #000000;
+        --dg-title-font-family: Verdana, Geneva, Tahoma, sans-serif;
+        --dg-title-font-size: 1.5em;
+    
+        /* Dial Arc */
+        --dg-arc-background-color: #efefef;
+        --dg-arc-color: #000000;
+        --dg-arc-width: 20;
+    
+        /* Numeric Display */
+        --dg-numeric-color: #000000;
+        --dg-numeric-font-family: Verdana, Geneva, Tahoma, sans-serif;
+        --dg-numeric-font-size: 2.5em;
+    
+        /* Subtitle */
+        --dg-subtitle-color: #000000;
+        --dg-subtitle-font-family: Verdana, Geneva, Tahoma, sans-serif;
+        --dg-subtitle-font-size: 1em;
+    }
+    
     .dial-gauge {
         background-color: var(--dg-background-color, #ffffff);
         border: var(--dg-border, 1px solid #000000);
@@ -60,18 +105,7 @@ template.innerHTML = `
         font-size: var(--dg-subtitle-font-size, 1.0em);
         text-anchor: middle;
     }
-</style>
-
-<div class="dial-gauge">
-    <svg width="100%" height="100%">
-        <text id="gauge-title" x="50%" y="11%"></text>
-        <path id="gauge-background-arc" fill="none" />
-        <path id="gauge-arc" fill="none" />
-        <text id="gauge-numeric" x="50%" y="50%">0.0</text>
-        <text id="gauge-subtitle" x="50%" y="96%"></text>
-    </svg>
-</div>
-`;
+`);
 
 /**
  * Creates a new DialGauge custom HTML element. Utilized in HTML as the <dial-gauge> tag.
@@ -102,6 +136,7 @@ export class DialGauge extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({mode: 'open'});
+        this.shadowRoot.adoptedStyleSheets = [styleSheet]; 
         this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
