@@ -234,22 +234,28 @@
           ],
           "attributes": [
             {
-              "name": "value"
+              "name": "value",
+              "fieldName": "value"
             },
             {
-              "name": "main-title"
+              "name": "main-title",
+              "fieldName": "mainTitle"
             },
             {
-              "name": "sub-title"
+              "name": "sub-title",
+              "fieldName": "subTitle"
             },
             {
-              "name": "scale-start"
+              "name": "scale-start",
+              "fieldName": "scaleStart"
             },
             {
-              "name": "scale-end"
+              "name": "scale-end",
+              "fieldName": "scaleEnd"
             },
             {
-              "name": "scale-offset"
+              "name": "scale-offset",
+              "fieldName": "scaleOffset"
             }
           ],
           "superclass": {
