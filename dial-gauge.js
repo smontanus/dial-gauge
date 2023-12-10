@@ -3,7 +3,7 @@
  * @fileOverview Dial Gauge is a web component that provides a
  * customizable dial gauge for numeric display. It utilizes SVG
  * and is written in pure Javascript with no dependencies.
- * @version 0.1.3
+ * @version 0.1.4
  * @author Stephen Montanus <steve@stevemontanus.com>
  * @copyright ©2023 Stephen Montanus Software Engineering.
  * @license MIT

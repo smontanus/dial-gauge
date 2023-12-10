@@ -1,7 +1,7 @@
 ## Dial Gauge Web Component
 [![Published on npm](https://img.shields.io/badge/npm-published-blue)](https://www.npmjs.com/package/dial-gauge)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/dial-gauge)
-[![Version](https://img.shields.io/badge/version-0.1.3-brightgreen)](https://github.com/smontanus/dial-gauge)
+[![Version](https://img.shields.io/badge/version-0.1.4-brightgreen)](https://github.com/smontanus/dial-gauge)
 
 Dial Gauge is a web component that provides a customizable dial gauge for numeric display. It is suitable for progress indication as well as graphical display of real time numeric data. It utilizes SVG and is written in pure Javascript with no dependencies.
 
