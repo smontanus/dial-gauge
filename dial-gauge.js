@@ -23,7 +23,7 @@ template.innerHTML = `
 </div>
 `;
 
-const styleSheet = CSSStyleSheet();
+const styleSheet = new CSSStyleSheet();
 styleSheet.replaceSync(`
     :host {
         /* Element */
@@ -136,7 +136,7 @@ export class DialGauge extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({mode: 'open'});
-        this.shadowRoot.adoptedStyleSheets = [styleSheet]; 
+        this.shadowRoot.adoptedStyleSheets = [styleSheet];
         this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
