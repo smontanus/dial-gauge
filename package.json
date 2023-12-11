@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dial-gauge.js",
   "module": "dial-gauge.js",
-  "files": ["custom-element.json"],
+  "files": ["custom-elements.json"],
   "scripts": {},
   "repository": {
     "type": "git",
